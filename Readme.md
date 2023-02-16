@@ -26,5 +26,5 @@ pip3 install -r requirements.txt
 4. Run the project
 
 ```bash
-python3 App.py
+python3 run.py
 ```
