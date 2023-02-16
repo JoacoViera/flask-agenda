@@ -1,0 +1,87 @@
+{% extends 'layout.html' %}
+
+{% block title %} Home {% endblock %}
+
+{% block body %}
+
+<div class="row">
+    <div class="col-lg-4 col-md-12 pt-5">
+        {% with messages = get_flashed_messages() %}
+
+        {% if messages %}
+        {% for msj in messages %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{msj}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+        {% endif %}
+
+        {% endwith %}
+        <div class="card card-body bg-secondary">
+            <form action="/add_contact" method="POST">
+                <div class="form-group">
+                    <input type="text" name="fullname" placeholder="Full name" class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" placeholder="Email" class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="text" name="phone" placeholder="Phone number" class="form-control">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block">
+                        Save Contact
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="col-lg-8 col-md-12 pt-5">
+        <table class="table table-hover table-bordered table-md">
+            <thead class="thead-dark">
+                <tr scope="col">
+                    <th scope="col" class="text-center">FULL NAME</th>
+                    <th scope="col" class="text-center">EMAIL</td>
+                    <th scope="col" class="text-center">PHONE</td>
+                    <th scope="col" class="text-center">EDIT | DELETE</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for contact in contacts %}
+                <tr class="table-light">
+                    <td>{{ contact.1 }}</td>
+                    <td>{{ contact.2 }}</td>
+                    <td>{{ contact.3 }}</td>
+                    <td>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-12">
+                                <a href="/edit/{{contact.0}}" class="btn btn-success btn-block mt-2">Edit</a>
+                            </div>
+    
+                            <div class="col-lg-6 col-md-12">
+                                <a href="/delete/{{contact.0}}" class="btn btn-danger btn-block mt-2 btn-delete">
+                                    Delete
+                                </a>
+                            </div>
+                        </div>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+
+
+
+{% endblock %}
