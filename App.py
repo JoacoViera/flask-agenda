@@ -86,9 +86,7 @@ def login():
 
         select_sql = 'SELECT * FROM users WHERE username = %s'
         data = username
-        print(data)
         result = select(conn, select_sql, data)
-        print(result)
 
         if (len(result) > 0):
             user_result = result[0]
@@ -134,8 +132,6 @@ def register():
 
         session['username'] = username
         session['password'] = password
-        print(session['username'])
-        print(session['password'])
 
         return redirect(url_for('home'))
 
